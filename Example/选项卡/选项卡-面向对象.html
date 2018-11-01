@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box div{display:none;}
+        #box button{width:45px;height:30px;line-height:30px;text-align:center;border:none;outline:none;cursor:pointer;}
+        #box .active{background:#f00;}
+        #box .show{display:block;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <button class="active">体育</button> 
+        <button>文化</button>
+        <button>财经</button>
+        <div class="show">开拓者双枪发力，取赛季开门红</div>
+        <div>未来10年智能家居行业持续领航</div>
+        <div>经济之城霍尔果斯迅速扩张后过冬</div>
+    </div>
+    <script>
+        //获取元素
+        function Tab(id){
+            this.box = document.getElementById(id);
+            this.btns = this.box.getElementsByTagName('button');
+            this.divs = this.box.getElementsByTagName('div');
+        }
+     //写事件方法
+       Tab.prototype.events = function(evname){
+           let git = this;
+            for(let i=0;i<this.btns.length;i++){
+                this.btns[i][evname] = function(){
+                    git.change(i);
+                }
+            }
+       }
+       //写移除方法
+       Tab.prototype.change = function(k){
+          for(let i=0;i<this.btns.length;i++){
+              this.btns[i].className = '';
+              this.divs[i].className = '';
+          }
+          this.btns[k].className = 'active';
+          this.divs[k].className ='show';
+       }
+       let t = new Tab('box');
+       t.events('onclick');
+    </script>
+</body>
+</html>
