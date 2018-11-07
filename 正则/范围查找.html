@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    9-108的范围
+    9   [9]
+    10-99 [1-9][0-9]
+    100-108 10[0-8]
+    */
+    let str = '109';  
+    console.log(/^[9]$|^[1-9][0-9]$|^10[0-8]$/.test(str));
+    //18-110
+    // console.log(/^1[8-9]$|^[2-9][0-9]$|^10[0-9]$|^110$/.test(str));
+    </script>
+</body>
+</html>

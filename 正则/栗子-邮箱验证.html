@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    邮箱：<input type="text" id="ipt">
+    <button id="btn">提交</button>
+    <script>
+    let ipt = document.getElementById('ipt');
+    let str = ipt.valule;
+    btn.onclick = function(){
+       if(/^\w+ [A-Za-z]{5,8}@[0-9a-zA-Z]{2,8}\.com&/.test(str)){
+            alert('验证成功');
+       }else{
+           alert('验证失败');
+       }
+       
+
+    }
+    </script>
+</body>
+</html>

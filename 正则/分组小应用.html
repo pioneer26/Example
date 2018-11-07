@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    let str = '2018-11-10';
+    let re = /(\d+)(-)/g;
+    let cont = str.replace(re,function(a1,a2,a3){
+    //    console.log(a1);
+    //    console.log(a2);
+    //    console.log(a3);
+        return a2+'.'; //对a2的操作
+   });
+   console.log(cont);//2018.11.10
+    </script>
+</body>
+</html>

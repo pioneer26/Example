@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      
+    /*
+        test()方法     返回布尔值
+        exec()方法     返回数组，只查找一次
+
+        match()方法    返回数组，可以全部获取到
+        replact()方法  返回替换后的结果
+    */
+    //查找以下字符串中的数字
+    let number = 'dsgg2g 3gfs';
+    console.log(/\d/.test(number)) //true
+    console.log(/\d/.exec(number));//["2", index: 4, input: "dsgg2g 3gfs", groups: undefined]
+    console.log(number.match(/\d/g));//(2) ["2", "3"]
+            //***match方法可以获取全部，前提也要加g全局，不加g的话也是只获取单个
+    //替换字符串中的某一个
+    let rep = '马德华的一曲《今天》甚是经典';
+    console.log(rep.replace('马','刘'));//刘德华的一曲《今天》甚是经典
+
+    /*
+    正则的贪婪性和懒惰性
+    懒惰性：让他1个数据，他就只找一个，找到即可返回，不会接着找。例如/a/->只找1个a，后面即使有a也不会管
+    贪婪性：让他找多个数据，他会无限的找（有多少就会找多少）。例如/\d+/->找1个或者找无限个，一直到末尾为止  
+    */
+    let x = 'sadg23gglhiweng08nUlsdh';
+    console.log(x.match(/g/g));//["g", "g", "g", "g"]
+    console.log(x.match(/\d+/g));//["23", "08"]
+    </script>
+</body>
+</html>

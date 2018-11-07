@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //找到下列字符串中的数字并且存入数组中
+    let str = 'sethlig354 5nfn';
+    let arr = [];
+    for(var i=0;i<str.length;i++){
+        //isNaN 检测是否是一个非有效数字
+        if(!isNaN(parseInt(str[i]))){ //如果str里面的内容是数字并且通过parseInt转成整数
+            arr.push(str[i]); //把整数放到arr数组中
+        }
+    }
+    console.log(arr);//(4) ["3", "5", "4", "5"]
+
+    //找到下面字符串中的连续的数字并放入数组中
+    let strs = 'wehlg32ng443n5n';
+    let arrs = [];
+    let temp = '';
+    /*
+    temp += 3
+    temp +=2 32
+    arrs.push(temp)
+
+    temp += 4
+    temp += 4
+    temp +=3 443
+     
+    */
+    for(let j=0;j<strs.length;j++){
+       if(!isNaN(parseInt(strs[j]))){   //是数字的话只会进行拼接
+           temp += strs[j];
+       }else{
+           //不是数字的时候才会进行push
+           if(temp){    //非空字符串
+               arrs.push(temp);  
+               temp = '';
+           }
+       }
+    }
+    console.log(arrs); //(3) ["32", "443", "5"]
+    console.log(strs.match(/\d/g));//["3", "2", "4", "4", "3", "5"]
+    console.log(strs.match(/\d+/g));// ["32", "443", "5"]
+   
+    </script>
+</body>
+</html>

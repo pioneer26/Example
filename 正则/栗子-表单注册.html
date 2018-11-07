@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则-表单验证</title>
+    <style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    ul li{
+        list-style:none;
+    }
+    .container{
+       width:1000px;
+        margin:50px auto;
+        text-align:center;
+    }
+    #my-form ul li{
+       margin:20px 0;    
+    }
+    #my-form ul li label{
+        font-size:16px;
+        color:#444;
+    }
+    #my-form ul li input{
+        width:450px;
+        height:32px;
+        line-height:32px;
+        padding:6px;
+        border:1px solid #ccc;
+        background:none;
+        outline:none;       
+    }
+    #btn{
+        margin-top:30px;
+        text-align:center;
+    }
+    #btn input{
+        width:120px;
+        height:36px;
+        line-height:36px;
+        font-size:14px;
+        color:#fff;
+        text-align:center;
+        background:orange;
+        border:none;
+        outline:none;
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="http://www.github.com" id="my-form">
+            <ul id="ul-box">
+                <li>
+                    <label for="">用户名称：</label>
+                    <input type="text" placeholder="请输入用户名">
+                </li>
+                <li>
+                    <label for="">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+                    <input type="password" placeholder="请再次输入密码">
+                </li>
+                <li>
+                    <label for="">确认密码：</label>
+                    <input type="password" placeholder="请输入密码">
+                </li>
+                <li>
+                    <label for="">联系电话：</label>
+                    <input type="text" placeholder="请输入联系电话">
+                </li>
+                <li>
+                    <label for="">电子邮箱：</label>
+                    <input type="text" placeholder="请输入电子邮箱">
+                </li>
+                <li>
+                    <label for="">身份证号：</label>
+                    <input type="text" placeholder="请输入身份证信息">
+                </li>
+            </ul>
+            <div id="btn"><input type="submit" value="提交"></div>
+        </form> 
+    </div>
+    <script>
+        let ulBox = document.getElementById('ul-box');
+        let ipt = ulBox.getElementsByTagName('input');
+        let btn = document.getElementById('btn');
+        //console.log(ipt);
+        for(var i=0;i<ipt.length;i++){
+            ipt[i].onblur = function(){
+                let val = ipt.value;
+                if(!val){
+                    alert('内容不能为空');
+                }
+            }
+        }
+        
+    </script>
+</body>
+</html>

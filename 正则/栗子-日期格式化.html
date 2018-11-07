@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    分组（子项）
+    ()小括号
+    1、代表分组->从左往右数，有几个小括号就有几个分组
+    2、优先级
+    */
+    //在replace中有几个分组，$0后面的参数就是这几个分组的值
+    //当分组和形参对应完之后，又会继续走默认Index input undefined这些
+    //在分组中，如果分组的后面直接加了量词，那么结果为量词的终点位置
+    let str = '2018 ---5 ==4';
+    let obj = (function(){
+        function da(str){
+            return str.replace(/(\d+)\D+(\d+)+\D+(\d+)+\D?/,($0,$1,$2,$3)=>{
+                return $1+'年'+ $2+'月'+$3+'日';
+            });
+        }
+        return {
+            da
+        }
+    })();
+    console.log(obj.da(str)); //2018年5月4日
+    </script>
+</body>
+</html>
