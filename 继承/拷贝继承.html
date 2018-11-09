@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    拷贝继承：继承方法
+        通过for in 遍历父类原型上的方法，把自身的所有赋值给子类的原型
+    */
+    function Person(name,age){
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.say = function(){
+        console.log('说话哈哈哈');
+    }
+    Person.prototype.sing = function(){
+        console.log('唱歌~~~');
+    }
+    function Coder(name,age){
+       Person.call(this,name,age); //通过call将this指向父类Person
+       
+    }
+    for(let attr in Person.prototype){ //in枚举父类的原型
+        if(Person.prototype.hasOwnProperty(attr)){ //hasOwnProperty检测是否是对象的某个私有属性
+            Coder.prototype[attr] = Person.prototype[attr];//将父类的原型赋给子类的原型
+        }       
+    }
+   p = new Person('大明',40);    
+   c = new Coder('小明',20);
+   //子类继承了父类say sing方法
+   c.say(); 
+   c.sing();
+    </script>
+</body>
+</html>

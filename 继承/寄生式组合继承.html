@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    寄生式组合继承：
+        通过object.create()方法继承
+    
+    */
+    function Person(name,age){
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.say = function(){
+        console.log('说学逗唱');
+    }
+    Person.prototype.runing = function(){
+        console.log('跑的挺快');
+    }
+    function Coder(name,age){
+        Person.call(this,name,age);
+    }
+   Coder.prototype = Object.create(Person.prototype);
+   //Coder.prototype = Object.assign({},Person.prototype);//类似拷贝
+  //Object.assign(Coder.prototype,Person.prototype);
+  Coder.prototype.say = function(){
+      console.log('学 说 学 逗 唱');
+  }
+
+  let c = new Coder('小明',20);
+  let p = new Person('大明',30);
+  c.say();
+    </script>
+</body>
+</html>

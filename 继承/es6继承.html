@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    
+    es6通过extends继承
+    声明子类 extends 父类名 进行继承父类
+    
+    */
+    class Person{
+        constructor(name,age){
+            this.name = name;
+            this.age = age;
+        }
+       say(){
+        console.log('名字'+this.name,'年龄'+this.age);
+       }
+    }
+    /*
+    子类constructor中添加属性的技巧：
+    专属于子类的属性放在参数前面，父类属性放在后面，这样就直接使用了...arg
+    */
+   class Coder extends Person{
+       constructor(job,...arg){
+        super(...arg);//等同于调用父类，把多余的参数放在super中达到继承父类属性的作用
+        this.job = job;
+        console.log(arg);
+       }
+       codeing(){
+           console.log('多敲');
+       }
+       say(){
+           console.log('恩恩');
+       }
+   }
+   let p = new Person('大人',32);
+   let c = new Coder('学生','小孩',18);
+  
+   c.codeing();
+   c.say();
+   console.log(p);
+   console.log(c);
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    原型继承：
+        创建一个空构造函数xhh
+        把空构造函数的原型等于父类原型
+        把子类原型等于new空函数 xhh
+    注意：要手动修改constructor指向
+    */
+    function Person(name,age){
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.eat = function(){
+        console.log('该吃吃');
+    }
+    Person.prototype.drink = function(){
+        console.log('该喝喝');
+    }
+    function Coder(name,age){
+        Person.call(this,name,age);        
+    }
+
+    function xhh(){} //创建一个空的函数 xhh
+    xhh.prototype = Person.prototype; //将父类的原型赋值给xhh的原型
+    Coder.prototype = new xhh; //把new xhh 赋值给子类的原型
+
+    
+    p = new Person();
+    c = new Coder();
+    </script>
+</body>
+</html>
