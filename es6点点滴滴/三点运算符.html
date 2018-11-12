@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        ...代表扩展和剩余
+        */
+        //扩展运算符：将数组或者对象里面的值展开
+        let a = [1,2,3];
+        // console.log(a); //123
+        let b = {a:1,b:2}
+        console.log({...b,c:3});//{a: 1, b: 2, c: 3}
+
+        //剩余运算符：将多个值收集为一个变量
+
+        const [aa, ...bb] = [1, 2, 3]
+        console.log(aa) // 1
+        console.log(bb) // [2, 3]
+    </script>
+</body>
+</html>
