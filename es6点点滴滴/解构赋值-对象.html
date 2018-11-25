@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+    /*
+     解构的值，必须要为对象的key值，不然会为undefined
+     let {key1,key2,key3:k3} = obj
+     k3就代表key3 ,当写了:k3时，key3就失效则报错。
+    */
+    // let {name,age,sex} = {name:'小黄',age:'20',sex:'男'};
+    // console.log(name,age,sex);//小黄 20 男
+    // let obj = {
+    //     name:'张',
+    //     age:14,
+    //     sex:'男'
+    // }
+    // let {name:n,age:a,sex} = obj;
+    // console.log(n);//张
+
+    // console.log(getComputedStyle(box).width);//1264px
+//     let {width:w,height:h} = getComputedStyle(box);
+//     console.log(w);//1264px
+
+//    let {top:t,left:l} = box.getBoundingClientRect();
+//    console.log(l); //8
+
+    // let obj = {
+    //     p:[
+    //         'hello',
+    //         {y:'world'}
+    //     ]
+    // };
+    // console.log(obj.p[0] +  obj.p[1].y);//helloworld
+    // let obj = {};
+    // let arr = [];
+    // ({foo:obj.prop,bar:arr[]});
+    /*
+        等号左边变量的次序，与右边同名属性次序不一致也可以取到值
+    */
+    let {c,f} = {f:'我的',c:123};
+    console.log(f,c);
+     /*
+        变量没有对应的同名属性，就会取不到值为undefined
+    */
+    let {e} = {a:'我的',b:123};
+    console.log(e);
+    </script>
+</body>
+</html>
