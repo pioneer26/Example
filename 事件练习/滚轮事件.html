@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    滚轮事件
+    onmousewheel：谷歌、IE使用
+        通过ev.wheelDelta获知当前滚轮的方向
+        上滚为正数，下滚为负数
+    DOMMouseScroll：火狐专用
+        通过ev.detail获知当前滚轮方向
+        上滚为负数，下滚为正数
+    */
+    // window.onmousewheel = function(ev){
+    //     if(ev.wheelDelta > 0){
+    //         console.log('正的');
+    //     }else{
+    //         console.log('负的');
+    //     }
+    // }
+    // window.DOMMouseScroll = function(ev){
+    //     if(ev.detail >0){
+    //         console.log('火狐正数');
+    //     }else{
+    //         console.log('火狐负数');
+    //     }
+    // }
+
+    /*
+    让谷歌和额火狐都保持统一
+    假设false是向下，true是向上。让两个浏览器都在true的时候表示向上
+    */
+   function myDo(obj,f){
+       if(window.onmousewheel === undefined){
+           obj.addEventListener('DOMMouseScroll',f);//谷歌
+       }else{
+           obj.addEventListener('mousewheel',f);//火狐
+       }
+   };   
+  myDo(window,function(ev){
+      let bosh = false;//默认等于false
+      if(ev.wheelDelta){
+          bosh = ev.wheelDelta >0 ? true:false;//如果ev.wheelDelta 大于0 就是向上
+      }else{
+          bosh = ev.detail <0? true :false;//如果ev.detail 小于0就是向上
+      }
+      if(bosh){
+          console.log('向上');
+      }
+      else{
+          console.log('向下');
+      }
+  });
+    </script>
+</body>
+</html>

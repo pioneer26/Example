@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #box1{
+        width:100px;
+        height:100px;
+        background:orange;
+        position:absolute;
+        top:0;
+        left:0;
+        z-index:10;
+    }
+    #box2{
+        position:absolute;
+        top:200px;
+        left:260px;
+        width:80px;
+        height:80px;
+        background:red;
+        z-index:0;
+    }
+    </style>
+</head>
+<body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <script>
+    const box1 = document.getElementById('box1');
+    const box2 = document.getElementById('box2');
+    let num = 0;
+    let disX = 0;
+    let disY = 0;
+    box1.onmousedown = function(ev){
+        disX = ev.pageX - box1.offsetLeft;
+        disY = ev.pageY - box1.offsetTop;
+        document.onmousemove = function(ev){
+          /*第一个盒子的左上右下 */         
+          let l1 = ev.pageX - disX;
+          let t1 = ev.pageY - disY;
+          let r1 = l1 + box1.offsetWidth;
+          let b1 = t1 + box1.offsetHeight; 
+          /*第二个盒子的左上右下*/
+          let l2 = box2.offsetLeft;
+          let t2 = box2.offsetTop;
+          let r2 = l2 + box1.offsetWidth;
+          let b2 = t2 + box1.offsetHeight;
+          if(r1 < l2 || b1 < t2 || l1 > r2 || t1 >b2){
+              box2.style.background = 'red';
+          }else{
+              box2.style.background = 'greenyellow';
+          }
+          box1.style.left = l1 + 'px';
+          box1.style.top  = t1 + 'px';
+        }
+        document.onmouseup = function(){
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+        return false;
+    }
+    </script>
+</body>
+</html>

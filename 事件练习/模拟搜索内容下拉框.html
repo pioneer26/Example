@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    ul li {
+        list-style:none;
+    }
+    #box{
+        width:800px;
+        margin:20px auto;
+    }
+    #txt{
+        width:220px;
+        outline:none;
+    }
+    #content{
+        width:220px;
+        border:1px solid #ccc;
+        display:none;
+    }
+    #content li{
+        font-size:14px;
+        line-height:24px;
+        padding-left:5px;
+    }
+    #content .active{
+       background:darkorange;
+       color:#fff;
+   }
+
+    </style>
+</head>
+<body>
+   <div id="box">
+        <input type="text" id="txt">
+        <ul id="content"></ul>
+   </div>
+   <script>
+
+   /*
+   思路：
+    1、生成结构，如果是第一个就给加上样式，否则不加
+    2、获取焦点时候显示下拉框内容，失去焦点时候隐藏下拉框内容
+    3、按 下键时候给下拉框依次加上样式（当最后一个时候，num %上他的长度，让他等于0，重新执行一遍）
+    4、按 上键时候给下拉框依次加上样式（当小于0的时候，让他的num等于最后一个，重新执行一遍）
+    5、按 回车键隐藏下拉框内容，并将li里面内容赋值到表单里面
+
+   */
+   let arr = ['reactredux 阮一峰','DOM点击事件','阻止冒泡行为','火狐与IE兼容问题']
+   let temp = '';
+   arr.forEach((e,i) =>{
+       temp+=`<li class="${i==0?'active':''}">${e}</li>`;//如果是第一个就加上active样式，否则就为空
+   });
+   content.innerHTML = temp;//生成结构
+   txt.onfocus = function(){
+       content.style.display = 'block';//获取焦点时候显示下拉框
+   }
+   txt.onblur = function(){
+       content.style.display = 'none';//失去焦点时候隐藏下拉框
+   }
+   let libox = document.getElementsByTagName('li');
+   let lis = libox[0];//获取li的第一个值
+   let num = 0;
+   txt.onkeyup = function(ev){
+       switch(ev.keyCode){
+           case 38:
+                num--;
+                if(num <0) num = arr.length-1;
+                lis.className = '';
+                libox[num].className ='active';
+                lis = libox[num];
+                break;
+            case 40:
+                num ++;
+                num %= arr.length;
+                lis.className = '';
+                libox[num].className ='active';
+                lis = libox[num];
+                break;
+            case 13:
+               this.value = lis.innerHTML;
+               content.style.display = 'none';
+               break;
+       }
+   }
+   </script>
+</body>
+</html>

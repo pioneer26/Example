@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #box{
+        width:100px;
+        height:100px;
+        background:#f00;
+        position:absolute;
+        top:0;
+        left:0;
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+    <dix id="box"></dix>
+    <script>
+    /*
+    拖拽需要的三个事件：
+        onmousedown、onmousemove、onmouseup
+    需要考虑的几个问题：
+    1、如果move移动事件给box的话，鼠标移动快的时候，会造成鼠标脱离盒子（盒子不跟鼠标走）
+    解决方法->把onmousemove给document
+    2、如果onmouseup抬起事件给box的话，在浏览器地址栏时候，松开鼠标，盒子还会跟着鼠标走
+    解决方法->把onmouseup事件给document
+    3、如果鼠标抬起时候不清onmouseup的话,在document上up时候操作还会执行一次
+    所以document.onmouseup也要给null
+    4、当页面中有文字或者图片被选中时候，这个时候操作拖拽会触发浏览器的默认行为
+    解决方法->在按下时候阻止默认行为
+    DOM0 return false
+    DOM1 ev.preventDefault()
+    */
+    const box = document.getElementById('box');
+    let disX = 0;//元素初始X轴位置
+    let disY = 0;//元素初识Y轴位置
+    let num = 0;
+    let onOff = true;//存一个开关，默认是true
+    box.onmousedown = function(ev){
+        /*元素位置等于鼠标按下的位置减去盒子边的位置*/       
+        disX = ev.pageX - box.offsetLeft;
+        disY = ev.pageY - box.offsetTop;
+        document.onmousemove = function(ev){
+            //如果条件成立num就++，顺便把开关设为fasle
+            if(onOff){
+                num ++;
+                onOff = false;
+            }
+            box.style.left = ev.pageX - disX + 'px';
+            box.style.top = ev.pageY - disY + 'px';
+        }
+        document.onmouseup = function(){
+            onOff = true;
+            //把鼠标移动和抬起事件清除
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+    }
+    </script>
+</body>
+</html>

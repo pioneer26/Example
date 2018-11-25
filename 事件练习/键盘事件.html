@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    键盘事件：当按键的时候触发的事件
+    注意：所有按键只认一次，如果有2次会覆盖第一次
+    使用组合键可以解决以上的情况
+    onkeydown键盘按下
+    onkeyup键盘抬起
+    特殊按键：布尔值，按着为true，不按为false（默认）
+        ctrlKey
+        shiftKey
+        altKey
+    */
+    // document.onkeydown = function(){
+    //     alert('来了');
+    // }
+    // document.onkeyup = function(){
+    //     alert('走');
+    // }
+    //通过onkeydown获取输入内容比当前按键少一次（少监听一次），一般都用onkeyup
+    //每个按键中都有对应的键值，而且键值都是有规律的。键值通过keyCode获取
+    /*
+    左上右下
+        37 38 39 40
+    数字0-9
+        48 - 57
+    英文a-z 
+        65 - 90
+    回车 17   
+    空格 32
+
+    控制台
+    蓝色：数字：
+    灰色：字符串：
+    */
+
+    document.onkeyup = function(ev){
+        //console.dir(ev.keyCode);可以查看每个键的具体键值
+        switch(ev.keyCode){
+            case 37:
+                console.log('左边');
+                break;
+            case 38:
+                console.log('上边');
+                break;
+            case 39:
+                console.log('右边');
+                break;
+            case 40:
+                console.log('下边');
+                break;
+            default:
+                console.log('无');
+        }
+    }
+    </script>
+</body>
+</html>
