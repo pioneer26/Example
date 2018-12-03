@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/jquery-3.1.1.js"></script>
+</head>
+<body>
+    <div id="box">盒子 </div>
+   
+    <script>
+    /*
+    选择器：
+        标签选择器：
+            #id
+            .class
+            tag
+        属性选择器：
+            $('ele[属性key=属性val]') -> $('li[class="li1"]')
+        伪类选择器：
+            :first 匹配第一个元素
+            :even  匹配所有索引值为偶数的元素，从 0 开始计数（现实中从1计数的奇数）
+            :odd   匹配所有索引值为奇数的元素
+            :lt(num) 小于某个索引
+            :gt(num) 大于某个索引 
+            :checked 匹配所有选中的被选中元素(复选框、单选框等，不包括select中的option)
+
+        val() => value
+        html() => innerHTML
+        txt() => innerText
+    */    
+   $('#box').css({
+       width:100,
+       height:100,
+       color:'yellow',
+       background:'red'
+   });
+   $(document).click(function(){
+       $('div').toggle();
+   });
+    </script>
+</body>
+</html>

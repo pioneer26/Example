@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/jquery-3.1.1.js"></script>
+</head>
+<body>
+        <button id="btn1">全选</button>
+        <button id="btn2" >不选</button>
+        <button id="btn3" >反选</button>
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+   
+    <script>
+    /*
+    全选 反选  不选
+    */
+   //全选
+   $('#btn1').click(function(){
+       $(':checkbox').prop('checked',true);
+   })
+   //全不选
+   $('#btn2').click(function(){
+       $(':checkbox').prop('checked',false);
+   })
+   //反选
+   $('#btn3').click(function(){
+       let ck = $(':checkbox');
+       for(let i=0;i<ck.length;i++){
+           let cs = $(ck[i]).prop('checked');
+           console.log(cs);
+           if($(ck[i]).prop('checked')){//如果里面的按钮是选中状态就让checked为false，否则为true
+            $(ck[i]).prop('checked',false);
+           }else{
+            $(ck[i]).prop('checked',true);
+           }
+       }
+   });
+    </script>
+</body>
+</html>

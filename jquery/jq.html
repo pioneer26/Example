@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/jquery-3.1.1.js"></script>
+    <style>
+    #box{
+        position:absolute;
+        top:0;
+        left:0;
+        width:50px;
+        height:50px;
+        background:rebeccapurple;
+      
+    }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+    /*
+        jquery
+        www.jquery123.com 中文文档
+        js的类库（方法库），把一堆常用的方法进行了封装，能够更好的兼容各种浏览器
+    */
+    //    $(document).click(function(){
+    //        $('#box').animate({
+    //            width:100,
+    //            height:100,
+    //            left:30,
+    //            top:50,
+    //            opacity:0.5
+    //        });
+    //    });
+    $(document).click(function(){
+        $('#box').toggle();
+    })
+    </script>
+</body>
+</html>
