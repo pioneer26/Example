@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+        跨域请求
+        三种解决方案:
+            1、jsonp
+                具备的三个条件：
+                1)保证全局有个函数
+                2)数据必须是函数的调用格式，也就是函数名+括号，内部是填充的数据格式
+                3)当需要请求数据时创建一个script标签，然后把src等于请求的接口，最后再把scr插入页面
+            2、服务器代理
+                通过服务器端文件访问第三方数据，这个服务器文件又和当前文件同源。
+                这时候当前请求的页面 去访问服务器文件就等同于直接请求第三方资源
+            3、CORS跨域资源共享
+                Cross Origin Resource Share，全称跨域资源共享
+                浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，
+                有时还会多出一次附加的请求，但用户不会有感觉,因此，
+                实现CORS通信的关键是*服务器*。只要服务器实现了CORS接口，就可以跨源通信。
+                高版本的XMLHttpRequest + 服务器权限解决跨域问题
+    */          
+
+   //jsonp请求
+    window.onload = function(){
+        document.onclick = function(){
+            let kd = document.createElement('script');//创建script标签
+            kd.src="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=小燕子&cb=fn";//把请求接口赋给script标签
+            document.getElementsByTagName('head')[0].appendChild(kd);//最后把script标签插入head中
+            // kd.remove();
+        }
+    }
+    function fn(data){//数据时函数的调用格式
+        console.log(data);
+    }
+    </script>
+</body>
+</html>
