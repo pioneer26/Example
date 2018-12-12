@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    var let const三者区别
+    */  
+    //1、var可以重复声明变量，而let不可以重复
+    //    var name = 'xiaohuang';
+    //    var name = 'xiaolan';
+    //    console.log(name);//xiaolan
+
+    //    let name = 'xiaohuang';
+    //    let name = 'xiaolan';
+    //    console.log(name);//报错'name' has already been declared
+    //2、var不受限于块级，而let受限于块级
+    {
+        var a = 10;
+    }
+    console.log(a);//Uncaught ReferenceError: a is not defined
+    //而let声明，只能在花括号里面打印，在外面打印就报错了
+    //3、var会与window相映射（会挂一个属性），而let不与window相映射
+    var m = 20;
+    console.log(window);
+    //也就是说var可以引用全局对象，而let不可以
+    var user = '小明';
+    console.log(window.user);//小明
+    // 4、var可以在声明的上面访问变量，在let有暂存死区，再声明的上面访问变量会报错
+    // console.log(bosh);//ReferenceError: bosh is not defined
+    let bosh = 100;
+
+    //const
+    //定义不可变的量，改变了就会报错
+    const num = 100;
+    // const num = 200;
+    console.log(num);//Identifier 'num' has already been declared
+    //声明之后必须赋值，否则会报错
+    const arr;
+    console.log(arr);//Missing initializer in const declaration
+    //不会与window相映射（不在window上挂一个属性）
+
+    //支持块级作用域，只要有{}都支持块级
+
+    //在声明的上面访问变量会报错
+    </script>
+</body>
+</html>
