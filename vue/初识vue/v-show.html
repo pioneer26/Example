@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+        .bosh1{
+            width:100px;
+            height:100px;
+            background:#f00;
+        }
+        .bosh2{
+            width:100px;
+            height:100px;
+            background:#f0f;
+        }
+        .bosh3{
+            width:100px;
+            height:100px;
+            background:#ff0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+       <div class="bosh1" v-if="onOff == 'a'"></div>
+       <div>隔开</div>
+       <div class="bosh2" v-else-if="onOff == 'a'"></div>
+       <div class="bosh3" v-else="onOff"></div>
+    </div>
+    <script>
+    /*
+    指令：
+        v-if="数据或者三目判断"
+            只要条件成立就显示if中的元素
+        v-else
+            如果if条件不成立显示当前的元素
+            ***v-else和v-elseif必须紧跟着v-if
+        v-else-if
+            也要紧跟v-if
+
+        v-show
+            条件成立就显示，不成立就display:none隐藏
+            （性能比v-if略好）
+
+        v-for
+    */
+    let app = new Vue({
+        el:'#app',
+        data:{
+            onOff:'b'
+        }
+        
+    })
+   
+    </script>
+</body>
+</html>

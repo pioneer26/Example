@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+    button{
+        width:40px;
+        height:30px;
+        text-align:center;
+        border:none;
+        cursor: pointer;
+    }
+    .active{
+        background:red;
+        color:#fff;
+        border:none;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button 
+         v-for="(val,key) in box"
+        @click="changes(key)"
+        :class="{active:key == num}"
+         >{{key+1}}</button>
+        <div
+            v-for="(val,key) in box"
+            v-show="key==num"
+        >{{val}}</div>
+    </div>
+    <script>
+    /*
+    运用知识点：
+        v-for
+        v-on,简写@
+        v-bind简写:
+        v-show
+    思路：
+        循环数据，当点击时候，把key传到changes方法中，然后num赋值给active
+        循环数组，只要box中key等于num就让它显示出来
+    */
+   new Vue({
+       el:'#app',
+       data:{
+          box:['俄克拉荷马','萨克拉门托','明尼苏达'],
+          num:0
+       },
+       methods:{
+           changes(key){
+               this.num = key;
+           }
+       }
+   });
+    </script>
+</body>
+</html>

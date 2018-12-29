@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+      <button v-on:click ="add">点击</button>
+      <button v-on:click ="del">删除</button>
+      <ul>
+          <li v-for="(val,key) in arr">{{val}}</li>
+      </ul>
+    </div>
+    <script>
+    /*
+    指令：
+        v-if="数据或者三目判断"
+            只要条件成立就显示if中的元素
+        v-else
+            如果if条件不成立显示当前的元素
+            ***v-else和v-elseif必须紧跟着v-if
+        v-else-if
+            也要紧跟v-if
+
+        v-show
+            条件成立就显示，不成立就display:none隐藏
+            （性能比v-if略好）
+
+        v-for
+            两个参数：v-for="(val,key)" in obj
+            三个参数：v-for="(val,key,index) in obj" {{val}}
+           val:数组中每个值，对象每个值
+           key：数据 下标  对象key值
+           index:下标0,1,2
+        
+            三选一用if，单个的用show
+
+           **花括号里面只能写一个变量
+            {{}} -> {{index}}:{{val}}
+        v-text
+            innerText 文本
+        v-html
+            innerHTML 内容（包括元素）
+        v-on:事件名称 = "fn"
+            事件函数写在methods对象下
+            methods在根实例下，值为一个对象
+            methods:{
+                函数名(){
+                    this指向实例
+                    this的数据修改，直接写this.数据名
+                }
+            }
+            改了数据，内容也会随之改变（只要操作数据即可）
+        v-on可以缩写成@
+        v-bind可以缩写成:
+        改变数据，视图就会改变
+        
+        v-bind:属性名
+        一般是用来操作属性。如class src href
+        :class="{red:true}" //red为类名  ： 布尔值   只有为true时候才显示class
+        :class="[c1,c2]"// 数组可以代表多个class    c1 c2为对象 {red:true}
+    */      
+   new Vue({
+       el:'#app',
+       data:{
+           arr:[],
+           num:0
+       },
+       methods:{
+           add(){
+            this.arr.unshift(++this.num);
+           },
+           del(){
+               this.arr.shift(--this.num);
+           }
+       }
+   });
+   
+    </script>
+</body>
+</html>

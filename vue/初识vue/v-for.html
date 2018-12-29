@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+        ul li {
+            list-style: none;
+        }
+        .bosh1{
+            width:100px;
+            height:100px;
+            background:#f00;
+        }
+        .bosh2{
+            width:100px;
+            height:100px;
+            background:#f0f;
+        }
+        .bosh3{
+            width:100px;
+            height:100px;
+            background:#ff0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+       <ul>
+           <li v-for="(val,key,index) in obj" v-if="index ==0">{{key}}:{{val}}</li>
+       </ul>
+    </div>
+    <script>
+    /*
+    指令：
+        v-if="数据或者三目判断"
+            只要条件成立就显示if中的元素
+        v-else
+            如果if条件不成立显示当前的元素
+            ***v-else和v-elseif必须紧跟着v-if
+        v-else-if
+            也要紧跟v-if
+
+        v-show
+            条件成立就显示，不成立就display:none隐藏
+            （性能比v-if略好）
+
+        v-for
+            两个参数：v-for="(val,key)" in obj
+            三个参数：v-for="(val,key,index) in obj">{{val}}
+           val:数组中每个值，对象每个值
+           key：数据 下标  对象key值
+           index:下标0,1,2
+        
+            三选一用if，单个的用show
+
+           **花括号里面只能写一个变量
+            {{}} -> {{index}}:{{val}}
+
+    */
+    let app = new Vue({
+        el:'#app',
+        data:{
+            arr:[1,2,3],
+            obj:{
+                name1:'小黄',
+                name2:'小蓝',
+                name3:'小绿'
+            }
+        }
+        
+    })
+   
+    </script>
+</body>
+</html>

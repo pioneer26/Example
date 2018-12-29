@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+    .active{
+        background:yellow;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button 
+        v-for="(val,key) in content" 
+        @click="changs(key)" 
+        :class="{active:key==num}"
+        >按钮{{key+1}}</button>
+        <div v-for="(val,key) in content" v-show="key==num">
+            {{val}}
+        </div>
+    </div>
+    
+    <script>
+    new Vue({
+        el:'#app',
+        data:{
+            content:['小黄车','小蓝车','摩拜单车'],
+            num:0
+        },
+        methods:{
+            changs(key){
+                this.num = key
+            }
+        }
+    });    
+    </script>
+</body>
+</html>

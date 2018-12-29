@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+        .bosh1{
+            width:100px;
+            height:100px;
+            background:#f00;
+        }
+        .bosh2{
+            width:100px;
+            height:100px;
+            background:#f0f;
+        }
+        .bosh3{
+            width:100px;
+            height:100px;
+            background:#ff0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+       <div class="bosh1" v-if="onOff"></div>
+       <div>隔开一段</div>
+       <div class="bosh2" v-if else="onOff == 'a'"></div>
+       <div class="bosh3" v-else="onOff == 'a'"></div>
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            methods:{
+
+            },
+            data:{
+                onOff:'b'
+            }
+        });
+   
+   
+    </script>
+</body>
+</html>

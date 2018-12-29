@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>vue常用指令</title>
+        <meta charset="UTF-8">
+        <script src="js/vue.min.js"></script>
+        <style type="text/css">
+        .even{background-color: #f2f2f2}
+        </style>
+    </head>
+    <body>    
+        <div id="app"></div>
+        
+        <script type="text/javascript">
+            new Vue({
+                el:'#app',
+                template:`
+                    <div>
+                        <h1 v-text="myTxt"></h1>
+                        <hr/>
+                        <div v-html="myHtml"></div>
+                        <hr/>
+                        <button v-if=" num == 1 ">显示1</button>
+                        <button v-else-if=" num == 2 ">显示2</button>
+                        <button v-else=" num == 3 ">显示3</button>
+                        <hr/>
+                        <button v-show="isShow">我默认显示</button>
+                        <hr/>
+                        <div v-bind:data-name=" myName " :data-sex=" '女' ">通过v-bind来给属性赋值</div>
+                        <hr/>
+                        <button v-on:click=" num = 1">改变num值为1</button>
+                        <hr/>
+                        <input v-model="country" placeholder="试着输入中国">
+                        <div v-if=" country == '中国' ">中国梦，我的梦！</div>
+                        <hr>
+                        <ul>
+                            <li v-for="(item,index) in newsList" :class="index%2==0 ? 'even' : ''">
+                                <p>{{item.title}}<p>
+                                发布时间：<span>{{item.time}}<span>
+                            </li>
+                        </ul>
+                        <hr>
+                        <div v-for="(value,key) in students">
+                            {{key}}:{{value}}
+                            <br/>
+                        </div>
+                        
+                    </div>
+                `,
+                data:{
+                    myTxt:'我是v-text的值',
+                    myHtml:'<p>我是HTML</p>',
+                    num:2,//改变num的值看效果
+                    isShow:true,
+                    myName:'Sheryl',
+                    count:1,
+                    country:'',
+                    newsList:[
+                        {title:"新闻标题一",time:"2018-08-31"},
+                        {title:"新闻标题二",time:"2018-08-31"},
+                        {title:"新闻标题三",time:"2018-08-31"}
+                    ],
+                    students:{
+                        'name':'Sheryl',
+                        'sex':'女',
+                        'age':25
+                    }
+                },
+                methods:{
+                    changeCount(action) {
+                        if (action === 'minus') {
+                            if (this.count > 1) {
+                                this.count--;
+                            } else {
+                                alert("不能再减了")
+                            }
+                        } else {
+                            this.count++
+                        }
+                    },
+                }
+            })
+        </script>       
+    </body>
+</html>

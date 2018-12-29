@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+    <style>
+        
+       .yellow{
+           width:100px;
+           height:100px;
+           background:yellow;
+       }
+       .red{
+           width:80px;
+           height:80px;
+           background:red;
+       }
+       .bor{
+           border:2px solid #666;
+       }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="changes">点击变化</button>
+        <div :class="{red:onOff}" class="" ></div>
+    </div>
+    <script>   
+    new Vue({
+        el:'#app',
+        methods:{
+                changes(){
+                    this.c ='yellow',
+                    this.onOff = !this.onOff;
+                }
+        },
+        data:{
+            c:'red',
+            onOff:true
+        }
+    });
+   
+    </script>
+</body>
+</html>

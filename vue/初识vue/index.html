@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+    </div>
+    <script>
+    /*
+    vue
+        大项目：
+            react 手动挡
+            生态：
+                PC
+                reactNative
+        小项目：vue   自动挡
+            PC
+            weex
+            中文，轻量，容易上手
+        学习方式：
+            被指令
+            学思想
+            逻辑（数据与视图）关系
+    */
+
+    /*
+    1、先引入vue.js
+    2、body中创建一个元素，给他id或class，比如#app
+    3、实例化Vue
+        {
+            el:id或class名字
+            data:{
+                数据:''||{}||[]
+            }
+        }
+    4、显示数据:
+        {{数据名称}}
+        
+
+    */
+    let app = new Vue({
+        el:'#app',
+        data:{
+            message:'hellow vue'
+        }
+        
+    })
+    setTimeout(()=>{
+        app.message = 'vue，来了';
+    },1000)
+    </script>
+</body>
+</html>
