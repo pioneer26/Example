@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //for 和 for in 循环
+    let ary = [12,34,46,68];
+    Array.prototype.m = 99;
+    for(var i=0;i<ary.length;i++){
+        console.log(ary[i]);//12 34  46  68 
+    }    
+    for(var key in ary){
+        console.log(ary[key]);//12 34  46  68 99
+    }
+    //从上面可以看出for in可以遍历原型上公用（自定义）的属性，而for只能遍历私有的属性
+    </script>
+</body>
+</html>

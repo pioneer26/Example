@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+   $('btn').click(function(){
+     $.ajax({
+         url:'/get',
+         data:{
+             user:$('txt').val(),
+         },
+        success:function(){
+            
+        }
+     })
+   })
+    </script>
+</body>
+</html>

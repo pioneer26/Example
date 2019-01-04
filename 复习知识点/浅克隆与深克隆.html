@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    浅克隆与深克隆
+
+    浅克隆：Object.assign([],arr)
+            通过for in循环arr,拿到数组中的每个值，把每个值赋给arr2
+            操作arr2不会影响arr,就达到了克隆的目的
+    */
+   let arr = [1,2,[0,['x'],{name:'某某某'}]];
+//    let arr2 = [];
+//    console.log(arr);
+//    for(let attr in arr){
+//        arr2[attr] = arr[attr];
+//    }
+//    let arr2 = Object.assign([],arr);
+   
+   function deepClone(data){
+       let n = data.push?[]:{};
+       for(let attr in data){
+           //in的数据为复合类型，还有继续for in 遍历
+           if(typeof data[attr] == 'object'){
+              n[attr] = deepClone(data[attr])
+           }else{
+               n[attr] = data[attr]
+           }
+           return n;
+       }
+   }
+//    let arr2 = deepClone(arr);
+    let arr2 = JSON.parse(JSON.stringify(arr));
+//    console.log(JSON.parse(JSON.stringify(arr)));
+    arr2.push(10);
+    console.log(arr2);
+    </script>
+</body>
+</html>

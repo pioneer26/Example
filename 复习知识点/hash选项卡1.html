@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div {
+            display: none;
+        }
+
+        button {
+            width: 45px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .active {
+            background: #f00;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="active">体育</button>
+    <button>文化</button>
+    <button>财经</button>
+    <div class="show">开拓者双枪发力，取赛季开门红</div>
+    <div>未来10年智能家居行业持续领航</div>
+    <div>经济之城霍尔果斯迅速扩张后过冬</div>
+    <script>
+        /*
+        1.获取div,button元素
+        2.给每个按钮加事件、添加索引 for  
+        3.点击大清洗 ，div,button
+        4.当前的按钮加上active
+        5.当前点击按钮的索引，对应到div中
+        */
+        const btn = document.getElementsByTagName('button');
+        const divs = document.getElementsByTagName('div');
+        let hash = window.location.hash;
+        let hashNum;
+        if (!hash) {
+            //如果没有hash就设置一下
+            window.location.hash = 'p=1';
+        } else {
+            //有的话就获取hash值
+            hashNum = window.location.hash.split('=')[1] * 1
+        };
+
+        for (let i = 0; i < btn.length; i++) { 
+              btn[i].onclick = function(){
+                window.location.hash ='p='+i;
+              }
+        };
+        window.onhashchange = function(){
+            hashNum=window.location.hash.split('=')[1] * 1;
+            console.log(hashNum);
+            for(let i=0;i<btn.length;i++){
+                btn[i].className='';
+                divs[i].className='';
+                
+            }
+            btn[hashNum].className='active';
+            divs[hashNum].className='show';
+        }
+
+    </script>
+</body>
+
+</html>

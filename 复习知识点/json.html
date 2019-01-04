@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+        JSON是一种数据格式，本质为字符串
+    */
+    let json = "{'name':'蜘蛛侠'}";
+    // console.log(JSON.parse(json));
+    // console.log(eval('('+ json +')'));
+
+    // console.log(new Function('a,b','return a+b')(1,2));
+
+    console.log(new Function('','return'+json)());
+    </script>
+</body>
+</html>
