@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+  <div id="app">
+      <input type="text" v-model="val">
+  </div>
+    <script>
+  /*
+  watch:（指定数据的监听器）
+        当指定数据发生变化时候触发
+        一开始不会触发，只有数据变化才触发
+        watch:{
+            //函数方式
+            要监听的数据名（新的数据，老的数据）{}
+            //只能监听到一层，多层或者深层的则监听不到
+            []一层  [{]}] 多层
+            
+            要监听的数据名：{
+                handler(){
+
+                },
+                deep:true//多层的时候一定要写,代表深度监听
+            }
+        },
+        //对象方式
+        要监听的数据名:{
+                
+            
+        }
+    可以通过watch把数据存储到本地
+    与computed的区别：
+        watch->一开始不会触发，只有数据变化才触发
+        computed->一开始会执行一次，只要数据变化就继承触发
+  */
+        new Vue({
+            el:'#app',
+            data:{
+                val:'沙河'
+            },
+            watch:{
+                //取值必须与上面的名字一致
+                val(v,ov){//v代表改变之后的数据，ov代表改变之前的数据
+                    //改变数据时候看看触没触发
+                    console.log(v,ov);
+                    localStorage.setItem('station',v)
+                }
+            }
+        });
+        function getStorage(station,init){
+           return localStorage.getItem(station)||init;//有的话走station,没有的话走init
+        }
+    </script>
+</body>
+</html>

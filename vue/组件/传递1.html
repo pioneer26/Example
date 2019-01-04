@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+   <div id="app">
+       <h1>{{arr}}</h1>
+       <!--引入组件，名字和创建组件的一致-->
+        <ppa :bosh="arr"></ppa>
+   </div>
+    <script>
+  /*
+ 父级数据传子级数据
+       1.通过在子组件的身上加一个v-bind:自定义属性名=父级的数据
+                <ppa v-bind:data="arr"> ->简写 <ppa :data="arr">
+            
+            2.子组件通过props去接收
+                props:['data']
+
+            3.使用
+                    {{data}}
+       
+    */
+   let obj = {
+       props:['bosh'],//子组件中用props接收
+       template:`
+            <ul>
+                <li v-for="(val,key) in bosh">{{val}}</li>
+            </ul>
+       `,
+       data(){
+
+       }
+   }
+   Vue.component('ppa',obj);
+   new Vue({
+       el:'#app',
+       data:{
+           arr:[1,2,3]
+       }
+   });
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+  <div id="app">
+      全选<input type="checkbox" v-model="all">
+      <hr>
+      <input type="checkbox" v-model="val.checked" v-for="(val,key) in arr">
+      {{arr}}
+  </div>
+    <script>
+   /*
+  computed:
+        计算属性
+            能监听data中数据的变化，当数据发生变化时候会触发
+            一开始会执行一次，只要数据变化就继承触发
+        定义：
+            函数(){
+                使用data中数据，自动帮你监听数据的变化
+                返回的结果就是通过改变数据 做的另一件事情（当数据变化时候需要做的事情）
+                    比如： 通过数据变化来进行累计 
+                           通过单选按钮的变化，来进行判断是否全选
+            }
+            //对象
+            name:{
+                使用get set
+            }
+        使用：
+            在html模板中{{函数名}} 
+                其中函数名字不要和data中数据 名字重复
+
+            get(){//获取时候}
+            set(){//修改时候}
+                当使用get set时候computed中定义的属性，为一个对象，
+                不使用get set时候，computed中定义的属性可以为一个函数
+
+        优点：指定看哪个数据就只看哪个数据
+  */
+    /*
+            console.log(obj.num < 5 && obj.num >5);
+
+    */
+   new Vue({
+       el:'#app',
+       data:{
+          arr:[
+              {
+                  checked:false
+              },
+              {
+                  checked:false
+              },
+              {
+                  checked:false
+              }
+          ]
+       },
+       computed:{
+           all:{
+               get(){
+                   return this.arr.every(e=>e.checked);
+               },
+               set(newValue){
+                return this.arr.forEach(e=>e.checked = newValue);
+               }
+           }
+       }
+   });
+    </script>
+</body>
+</html>

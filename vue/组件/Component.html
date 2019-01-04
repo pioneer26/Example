@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+   <div id="app">
+       <!--引入组件，名字和创建组件的一致-->
+        <ppa></ppa>
+   </div>
+    <script>
+  /*
+  component组件，难点是数据传递
+  命名规则：尽量不使用驼峰命名
+  小技巧：
+        组件名字和引入组件名字尽量一样
+        如果要写驼峰命名，引入组件名字时候，大写变小写，中间带-
+            比如创建Vue.component('pp-x',{})
+            引入<pp-x></pp-x>
+  vue.component(组件名称,对象) 必须放在跟实例的上面
+  {
+      template:`<div>子级</div>`,//需要放在父级的盒子里面
+      data,
+      methods,
+      co
+  }
+
+  1、Vue.component('名字',{})
+  2、new Vue()
+  3、引入组件名字
+ */ Vue.component('ppa',{//必须放在跟实例的上面
+    template:`
+    <div>
+        <h4>子级</h4>
+        <button @click="fn">按钮的{{val}}</button>
+    </div>
+    `,//需要放在父级的盒子里面 
+    /*
+        在子组件里面的data必须是函数形式，函数中返回一个对象。对象下挂数据
+    */
+    data(){
+        return{
+            val:'子组件'//return一个对象
+        }
+    },
+    methods:{
+        fn(){
+            alert(1);
+        }
+    }
+    });
+   new Vue({
+        el:'#app'  
+
+    }) 
+ 
+  
+    </script>
+</body>
+</html>
