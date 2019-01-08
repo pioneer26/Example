@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    字符串是有零到多个字符组成
+    字符串常用方法：  
+    1、charAt/charCodeAt：
+        charAt->根据索引获取指定位置的字符
+        charCodeAt->获取字符的同时获取对应的unicode编码值
+    */
+    let str = 'zhufengpeixinxuexi' ;
+    console.log(str.charAt(2));//u
+    console.log(str.charCodeAt(2));//117 ascii编码 u->10进制->117
+
+    console.log(str[90]);//undefined
+    console.log(str.charAt(90)); //空字符
+    /*
+    2、indexOf/lastIndexOf:
+        indexOf->获取当前项在字符串中第一次出现的索引，没有返回-1
+        lastIndexOf->获取当前项在字符串中最后一次出现的索引，没有返回-1
+    */
+    console.log(str.indexOf('f'));//3
+    console.log(str.indexOf('x'));//10
+    console.log(str.lastIndexOf('x'));//16
+    /*
+    3、slice：支持负数索引
+        str.slice(n,m)从索引n开始找到索引m处(不包含m),把找到的字符当作新字符串返回
+    */
+    console.log(str.slice(0,8));//zhufengp 不包含第8个索引
+    console.log(str.slice());//zhufengpeixinxuexi  新克隆一个
+    console.log(str.slice(2));//ufengpeixinxuexi 一直找到末尾
+    console.log(str.slice(-2,-1));//x 倒着找
+    /*
+    4、substring 不支持负数索引
+        str.substring(n,m)从索引n开始找到索引m处(不包含m),把找到的字符当作新字符串返回
+    
+    */
+    console.log(str.substring(0,8));//zhufengp
+    console.log(str.substring());//zhufengpeixinxuexi
+    console.log(str.substring(-2,-1)) //空字符串
+
+    /*
+    5、substr 字符串截取(支持负数索引)
+        str.substr(n,m);从索引n开始截取m个
+    */
+    console.log(str.substr(3,2));//fn
+    console.log(str.substr());//zhufengpeixinxuexi
+    console.log(str.substr(5));//ngpeixinxuexi
+    /*
+    6、split 把一个字符串分割成字符串数组
+        spliet->把字符串连接成数组
+        join->把数组连接成字符串
+    */
+    let m = [12,24,36,48];
+    let n = '12/24/36/48';
+    console.log(m.join('/'));//12/24/36/48
+    console.log(n.split(''));//["1", "2", "/", "2", "4", "/", "3", "6", "/", "4", "8"]
+    /*
+    7、toUpperCase/toLowerCase
+        toUpperCase->小写转大写
+        toLowerCase->大写转小写
+    */
+    console.log(str.toUpperCase());//ZHUFENGPEIXINXUEXI
+    console.log(str.toLowerCase());//zhufengpeixinxuexi
+   /*
+   8、replace 替换原有字符串
+        replace(n,m);n为原有字符，m为替换字符
+        返回替换后的字符
+   */
+   let z = 'zhufeng08';
+   let zz = 'zhufeng08xuexi09'
+    console.log(z.replace('zhufeng','珠峰')) //珠峰08
+    //replace默认执行一次只能替换一个
+    console.log(zz.replace('zhufeng','珠峰'));//珠峰08xuexi09
+   /*
+   9、trim:去掉开头和结尾空格后的字符串
+   */
+   let t  = '  sx dj '
+   console.log(t.trim());//sx dj
+    </script>
+</body>
+</html>
