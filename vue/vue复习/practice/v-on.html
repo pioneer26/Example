@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="app">
+      <button @click="add">添加</button>
+      <button @click="rm">删除</button>
+      <ul>
+          <li v-for="(val,key) in arr">{{val}}</li>
+      </ul>
+    </div>
+    <script>
+    /*
+       v-on:事件名
+       缩写:@事件名
+
+       事件函数写在methods
+
+        methods在根实例下，值为一个对象
+
+        methods:{
+            函数名(){
+                this指向实例
+                this的数据修改，直接this.数据名即可
+            }
+        }
+
+    */
+   new Vue({
+       el:'#app',
+       data:{
+           num:0,
+           arr:[]
+       },
+       methods:{
+           add(){
+            this.arr.unshift(++this.num)
+           },
+           rm(){
+               if(this.num>0){
+                this.arr.shift();
+                this.num --;
+               }
+           }
+       }
+   });
+    </script>
+</body>
+</html>

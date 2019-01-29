@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+       <ul>
+           <li v-for="val in items">{{val}}</li>
+       </ul>
+       <ol>
+           <li v-for="(user,key) in itemObj">{{user.name}}</li>
+       </ol>
+       <div v-for="(val,key,index) in obj" >{{key}}：{{val}}</div>
+    </div>
+    <script>
+    /*
+    val:数组中的每个值，对象每个值
+    key:数据就下标，对象key值
+    index:下标0,1,2
+    */
+   new Vue({
+       el:'#app',
+       data:{
+           items:['苹果','橘子','香蕉','草莓','柚子'],
+           itemObj:[
+               {name:'apple'},
+               {name:'orange'},
+               {name:'banana'},
+               {name:'strawberry'},
+               {name:'pomelo'},
+            ],
+            obj:{
+               id:1,
+               name:'小明',
+               age:22,
+               home:'太原'
+            }
+       }
+      
+   });
+    </script>
+</body>
+</html>
