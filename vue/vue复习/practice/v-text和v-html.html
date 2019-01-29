@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+    <style>
+    
+    </style>
+</head>
+<body>
+    <div id="app">
+       <span>{{msg}}</span> 
+       <p v-text="msg"></p>
+       <p v-html="str"></p>
+    </div>
+    <script>
+    /*
+     {{}}这种当我们网速很慢或者js出错时，会暴露我们的{{xxx}},这时候可以使用v-text
+     v-text =>  等同于innerText  文本
+     v-html =>  等同于innerHTML  内容（包括元素）     
+    */
+   new Vue({
+       el:'#app',
+       data:{
+           msg:'你好，世界',
+           str:'<h2>内容</h2>'//这里使用v-html，v-text会把<h2>标签也输出来
+       }
+   });
+    </script>
+</body>
+</html>

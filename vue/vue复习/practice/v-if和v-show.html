@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-if="islo">你好，vue</div>
+        <div v-else="islo">请登录</div>
+    </div>
+    <script>
+     /*
+    vue-if与vue-show的区别
+        两者都是动态显示DOM元素
+        不同点：
+        1、使用方式
+            v-if是根据后面数据的真假，来判断DOM的添加删除等操作
+            v-show只是在修改元素的css样式（display属性值）
+        2、实现过程
+            v-if切换有一个局部编译/卸载的过程，切换过程中合适地销毁和重建内部的事件监听和子组件；
+            v-show只是简单的基于css切换操作
+        3、条件渲染
+            v-if如果初始渲染条件为真，就渲染，反之就不渲染
+                （并且在渲染条件切换时，相对应的条件块内的事件监听器和子组件会适当的销毁和重建）
+            v-show不管初始条件是否为真，都会被渲染
+                （只是通过修改css属性display来控制显示与隐藏）
+        4、性能消耗
+            v-if有更高的切换消耗，不适合做频繁的切换
+            v-show有更高的初始渲染消耗，适合做频繁的额切换
+        另外v-show不支持v-else和template元素
+        总结：v-if和v-show都是用来控制元素的渲染
+             v-if判断是否加载，可以减轻服务器的压力，在需要时加载,但有更高的切换开销
+             v-show调整DOM元素的CSS的dispaly属性，可以使客户端操作更加流畅，但有更高的初始渲染开销
+             如果需要非常频繁地切换，则使用 v-show 较好，如果在运行时条件很少改变，则使用 v-if
+
+    */
+   new Vue({
+       el:'#app',
+       data:{
+           islo:false
+       }
+   })
+    </script>
+</body>
+</html>
