@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品累计</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+.con{
+    width: 600px;
+    /* height:500px; */
+    background: teal;
+    margin: 60px auto;
+}
+.con h1{
+    text-align: center;
+    color: #ffffff;
+    display: block;
+    padding: 30px;
+}
+.con ul{
+    width: 500px;
+    /* border: 1px solid red; */
+    list-style: none;
+    margin: 0 auto;
+    clear: both;
+}
+.con ul li{
+    width: 400px;
+    height: 60px;
+    background:salmon;
+    margin: 20px auto;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 60px;
+    /* padding-left: 20px; */
+}
+.con ul li>span:nth-child(4),.folter>span:last-child{
+    float: right;
+    margin-right: 20px;
+    color: #fff;
+    font-weight: bold;
+}
+.con ul li>span:nth-child(4){
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+}
+.con ul li>span:nth-child(1),.folter>span:first-child{
+    float: left;
+    /* border: 1px solid red; */
+    width: 200px;
+    margin-left: 20px;
+    color: #fff;
+    font-weight: bold;
+}
+.con ul li>span:nth-child(2){
+    float: left;
+    margin-left: 20px;
+}
+.con ul li>span:nth-child(3){
+    float: right;
+    margin-right: 20px;
+    /* float: left; */
+    /* margin-left: 30px; */
+    cursor: pointer;
+    display: inline-block;
+    /* border: 1px solid red; */
+}
+.folter{
+    height: 50px;
+    width: 400px;
+    margin: 0 auto;
+    border-top: 1px solid #fff;
+    padding-top: 15px;
+    font-size: 25px;
+}
+.con ul li.active{
+    background: yellowgreen;
+}
+ul input{
+    float: left;
+    width:18px;
+    height:18px;
+}
+.add{
+    width: 450px;
+    margin: 0 auto;
+    /* border: 1px solid red; */
+    color: #fff;
+    height: 50px;
+}
+.add span{
+    margin-right: 10px;
+}
+.add input{
+    width: 120px;
+    margin: 5px;
+    height: 25px;
+    /* border: 1px solid #333; */
+    border-radius: 5px;
+    color: salmon;
+    padding-left: 10px;
+}
+.add button{
+    width: 40px;
+    height: 30px;
+    border-radius: 5px;
+}
+.del{
+    display: inline-block;
+}
+
+.kuang{
+    width: 400px;
+    height: 280px;
+    background:rgba(0,0,0,0.8);
+    /* border: 2px solid #333;; */
+    position: fixed;
+    border-radius: 5px;
+    margin-left: -200px;
+    top:20%;
+    left: 50%;
+    display: none;
+}
+.kuang span{
+    color: #fff;
+    text-align: center;
+    display: block;
+    margin-top: 60px;
+    font-size: 24px;
+}
+.kuang button{
+    width: 120px;
+    /* border: 1px solid red; */
+    height: 40px;
+    /* display: inline-block; */
+    cursor: pointer;
+    margin: 80px 10px 0px 50px;
+    border-radius: 10px;
+    background: none;
+    color: #fff;
+    font-size: 16px;
+}
+</style>
+</head>
+<body>
+   
+    <div id="main">
+        <div class="con">
+            <h1>PRODUCT</h1>
+            <div class="add">
+                <span>商品:</span>
+                    <input 
+                       v-model.trim="goods"
+                    >
+                <span>价格:</span>
+                    <input 
+                    v-model.trim="price"
+                    @input="judge"
+                    >
+                <button @click="add">添加</button>
+            </div>
+            <ul>
+                <li v-for="(val,key) in arr" 
+                    :class="{active:val.active}"
+                >
+                    <input type="checkbox" v-model="val.active">                   
+                    <span>{{val.name}}</span>
+                    <span>${{val.price}}</span>
+                    <!-- <span>修改</span> -->
+                    <span @click="rm(val.id)">删除</span>
+                </li>
+            </ul>
+
+            <div class="folter">
+                <span>total</span>
+                <span></span>
+            </div>
+            <div 
+                class="kuang"
+                :style="{display:tips}"
+            >
+                    <span>确定要删除么？</span>
+                    <button @click="sure">确定</button>
+                    <button @click="cancel">取消</button>
+            </div>
+
+        </div>
+        
+    </div>
+<script src="../js/vue.min.js"></script>
+<script>
+/*
+1、添加商品
+2、选中
+3、删除
+4、总计
+*/
+new Vue({
+    el:'#main',   
+    created(){
+    //     //请求数据，添加数据
+    //    fetch('./data.json')
+    //    .then(e=>e.json())
+    //    .then(d=>{
+    //        console.log(d);
+    //        this.arr.push(...d);
+    //    })
+    },
+    data:{
+        arr:[
+            {
+                id:1,
+                name:'apple',
+                price:20,
+                active:true
+            },{               
+                id:2,
+                name:'orange',
+                price:23,
+                active:false
+            },
+            {
+                id:3,   
+                name:'banana',
+                price:40,
+                active:false
+            }
+        ],
+        goods:'',//商品
+        price:'',//价格
+        tips:'none',//提示框
+        num:null
+    },
+    methods:{
+        judge(){
+            //判断输入的价格是否为数字，且小于4位，小数保留两位数
+            if(!/^\d{1,4}(\.\d{1,2})?$/.test(this.price)){
+                alert('输入正确的价格');
+            }
+        },
+        add(){
+            let {price,goods} = this;
+            this.arr.unshift(
+                {
+                    id:Date.now(),
+                    name:goods,
+                    price:price,
+                    active:false
+                }
+            )
+            this.val = this.price = '';
+        },
+        rm(id){
+            this.tips = 'block';
+            this.num = id //把要删除的id，赋值给this.num,为了找到删除的那项
+            console.log(this.num);
+        },
+        sure(){
+            //把不是this.num的数据保留下来（过滤删除的id对应的数据）
+            this.arr = this.arr.filter(e=>e.id!=this.num);
+            this.tips = 'none';
+            this.num = null;
+        },
+        cancel(){
+            //隐藏弹框
+            this.tips = 'none';
+            this.num = null;
+        }
+    }
+}); 
+
+
+
+</script>
+</body>
+</html>
