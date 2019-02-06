@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">      
+       <input type="text" v-model="val">
+       <ul>
+           <li v-for="(val,key) in arr">
+               <input type="checkbox" v-model="val.checked">
+           </li>
+       </ul>
+       {{arr}}
+    </div>
+    <script>  
+    /*
+    watch：指定数据的监听器
+        当指定数据发生变化时候触发。一开始不会触发，只有数据变化才会触发
+
+        第一种写法：
+            watch:{
+                要监听的数据名(新的数据，旧的数据){
+                    //执行的操作
+                    //只能监听一层，两层或者深层监听不到，需要deep为true(深度监听)
+                }
+            }
+        第二种写法
+            watch:{
+                要监听的数据名(新的数据，旧的数据){
+                    handler(){
+                        
+                    },
+                    deep:true
+                }
+            }
+    */
+    new Vue({
+        el:'#app',
+        data:{
+            val:'hao123',
+            arr:[
+                {checked:true},
+                {checked:false},
+                {checked:false},
+                {checked:false}
+            ]
+            
+        },
+        // watch:{
+        //     //函数val名字要跟data数据中名字val一致
+        //     val(newVal,oldVal){//newVal是新数据，oldVal是原先的数据
+        //         console.log(99);
+        //         localStorage.setItem('name',newVal);
+        //     }
+        // }
+        watch:{
+            arr:{
+                handler(v){
+                    localStorage.setItem('data',JSON.stringify(v))
+                },
+                deep:true
+            }
+        }
+
+    });
+    function getStorage(name){
+        //存储到本地
+        let data = localStorage.getItem(name) || '[{"checked":false},{"checked":false},{"checked":false}]';
+        return  JSON.parse(data); //[] -> [{}]
+    }
+    </script>
+</body>
+</html>
