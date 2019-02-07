@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">  
+        <h2>父级的</h2>       
+       <input type="text" v-model="val" @keyup.13="add" >
+       {{arr}}
+       <h4>子组件</h4>
+       <ppx :data="arr" @changebool="ck"></ppx>
+    </div>
+    <script>  
+    /*
+     子级传递父级：
+        在子组件上绑定一个自定义事件，并且传入父级的“事件”处理函数
+            比如 子组件定义<ppx @customev="changC">
+                 其中changC是父组件定义的
+        在子组件内部监听这个自定义事件
+        this.$emit('自定义事件名',参数)
+            比如change(){
+                this.$emit('customev',id,xxx)
+            }
+   */
+   let obj={
+       props:{
+           data:{
+               type:Array,
+               default:[]
+           }
+       },
+        template:`
+            <div>
+                <ul>
+                    <li v-for="(val,key) in data">
+                        <input type="checkbox" @click="changeC(val.id,$event)">
+                        <span>{{val.name}}</span>
+                    </li>
+                </ul>
+            </div>
+        `,
+        methods:{
+            changeC(id,ev){
+                //自定义的changebool事件，触发时候执行ck
+               this.$emit('changebool',id,ev.target.checked);
+            }
+        }
+   }
+   Vue.component('ppx',obj);
+   new Vue({
+    el:'#app',
+    data:{
+        val:'',
+        arr:[
+            {
+                id:0,
+                name:'巴黎',
+                checked:false
+            },
+            {
+                id:1,
+                name:'东京',
+                checked:false
+            },
+            {
+                id:2,
+                name:'伦敦',
+                checked:true
+            },
+            {
+                id:3,
+                name:'悉尼',
+                checked:false
+            }
+        ]
+    },
+    methods:{
+        add(){
+            this.arr.push({
+                id:+new Date,//隐式类型转换,可以把字符串转成数字类型
+                name:this.val,
+                checked:false
+            });
+            this.val = '';
+        },
+        ck(id,bool){
+           this.arr.forEach(e=>{
+            //如果当前的id 等于 id 就把当前数据的checked 赋给 bool
+            if(e.id === id){
+                this.checked = bool;
+            }
+           })
+        }
+    }
+  });
+  /*
+  vue 组件间传递数据为单向数据流动：
+    父级把数据传给子级，子级拿到数据后渲染页面，但无权修改父组件传递给它的数据
+
+    数据从父级流向子级，数据本身还是父级的
+    如果操作子级要改变父级的数据，只能通过子级告知父级要操作哪个数据
+    然后让父级去修改自己的数据，修改完毕再传给子级
+    （父组件通过 props 向下传递数据给子组件，子组件通过 events事件 给父组件发送消息）
+    比如checkbox复选框，修改他只能让父级修改，不允许子级修改
+    
+  */
+    </script>
+</body>
+</html>

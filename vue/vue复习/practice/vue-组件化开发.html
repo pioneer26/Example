@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">  
+        <h2>父组件</h2>    
+       <ppx></ppx>
+    </div>
+    <script>  
+    /*
+        vue组件化开发 component
+            主要为了把一个大功能拆分成若干个小的功能，解决高耦合问题
+            同时也方便开发人员维护
+        
+        组件必须放在根实例（new Vue）的上面
+        Vue.component(组件名称，对象){
+
+        }
+
+        命名规则：尽量不使用驼峰命名
+        小技巧：组件名字与引入组件的名字尽量保持一致
+            比如 Vue.component('ppx') //组件名字
+            <ppx></ppx> //引入组件名字
+
+        template
+            template顶层只能有一个div盒子
+
+        1、Vue.component('ppx',{});
+        2、new Vue({});
+        3、引入组件<ppx></ppx>
+
+        在子组件中，data必须为函数，函数值返回一个对象，对象下面挂数据
+
+        传递数据：
+            1、在组件上挂一个自定义属性（属性里面放数据）
+            2、子组件上设置props来进行接收
+                props可以为一个数组，数组里面写自定义属性的名字
+            
+   */
+   let obj = {
+        template:`
+            <div><h4>{{val}}</h4></div>
+        `,
+        data(){
+            return {
+                val:'我是子组件'
+            }
+        }
+   }
+
+   Vue.component('ppx',obj);
+   new Vue({
+    el:'#app'
+   });
+    </script>
+</body>
+</html>
