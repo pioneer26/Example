@@ -7,7 +7,7 @@
 </head>
 <body>
     <div id="app">  
-        <h2>父级的</h2>       
+        <h2>父组件</h2>       
        <input type="text" v-model="val" @keyup.13="add" >
        {{arr}}
        <h4>子组件</h4>
@@ -90,7 +90,7 @@
            this.arr.forEach(e=>{
             //如果当前的id 等于 id 就把当前数据的checked 赋给 bool
             if(e.id === id){
-                this.checked = bool;
+                e.checked = bool;
             }
            })
         }
