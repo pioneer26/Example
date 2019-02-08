@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">  
+        
+    </div>
+    <script>  
+    /*
+    vue的生命周期就是一个vue组件或实例从出生到销毁的过程
+    所有生命周期钩子的this上下文指向他的vue实例
+
+    1、实例、组件通过new Vue() 创建出来之后会初始化事件和生命周期，然后就会执行beforeCreate钩子函数，这个时候，数据还没有挂载呢，只是一个空壳，无法访问到数据和真实的dom，一般不做操作
+
+    2、挂载数据，绑定事件等等，然后执行created函数，这个时候已经可以使用到数据，也可以更改数据,在这里更改数据不会触发updated函数，在这里可以在渲染前倒数第二次更改数据的机会，不会触发其他的钩子函数，一般可以在这里做初始数据的获取
+
+    3、接下来开始找实例或者组件对应的模板，编译模板为虚拟dom放入到render函数中准备渲染，然后执行beforeMount钩子函数，在这个函数中虚拟dom已经创建完成，马上就要渲染,在这里也可以更改数据，不会触发updated，在这里可以在渲染前最后一次更改数据的机会，不会触发其他的钩子函数，一般可以在这里做初始数据的获取
+
+    4、接下来开始render，渲染出真实dom，然后执行mounted钩子函数，此时，组件已经出现在页面中，数据、真实dom都已经处理好了,事件都已经挂载好了，可以在这里操作真实dom等事情...
+
+    5、当组件或实例的数据更改之后，会立即执行beforeUpdate，然后vue的虚拟dom机制会重新构建虚拟dom与上一次的虚拟dom树利用diff算法进行对比之后重新渲染，一般不做什么事儿
+
+    6、当更新完成后，执行updated，数据已经更改完成，dom也重新render完成，可以操作更新后的虚拟dom
+
+    7、当经过某种途径调用$destroy方法后，立即执行beforeDestroy，一般在这里做一些善后工作，例如清除计时器、清除非指令绑定的事件等等
+
+    8、组件的数据绑定、监听...去掉后只剩下dom空壳，这个时候，执行destroyed，在这里做善后工作也可以
+    */
+
+    /*
+    beforeCreate 在组件初始化之前
+        这个生命周期组件的数据、方法、事件还都没有
+        简单来说,new Vue之后 第一句话就调用beforeCreate
+            new Vue({
+                beforeCreate()
+            });
+            比如：
+            function Fn(age){
+                beforeCreate()
+                this.age = age;
+            }
+        应用：可以使用loading
+    created 当数据初始化之后调用
+        当数据、方法、事件初始化之后调用
+        简单点来说，当数据有初始值之后调用       
+        比如：
+        function Fn(age){
+            beforeCreate()
+            this.age = age;
+            created();//这时候拿到数据就可以修改数据了
+        } 
+        应用：一般都是请求数据的时候用，可以关闭loading
+    beforeMount 渲染之前
+        beforeMount之前el上还是undefined
+
+    mounted 渲染之后
+        Dom渲染之后，可以获取页面的（主要是数据生成出来的）元素
+        nextTick:当DOM更新完成时触发，只要操作DOM就使用nextTick(不用依依映射)
+        （如果mounted下不能准确拿到dom元素，那么就使用nextTick）
+
+    beforeUpdate 数据更新之前
+        当组件或实例的数据更改之后，会立即执行beforeUpdate
+    update 数据更新之后
+        （一般使用computed居多）
+        可以直接使用computed即可
+    beforeDestroy 生命周期销毁之前
+        应用场景：关掉定时器、状态初始化
+    destroyed 生命周期销毁之后
+        Vue实例销毁后，数据就不能添加
+
+    */
+   /*
+   一般来说用的最多的是created和mounted。
+   在new 了vue之后 一开始进行beforecreate，这时数据还没有初始化。
+   可以去做一个loading动画，然后进入created 这时数据已经初始化（data的方法已经有了），
+   此时可以请求数据。请求数据一般用created，在执行中看有没有el属性，有的话就走el，可以把根节点挂载上。
+   没有的话就直接看vm身上有没有$mount，如果两个都没有，（缺少挂载点），生命就结束了。
+   如果有挂载点就看看有没有template属性，有的话就把挂载点的值替换掉，没有的话找根节点的innerHTML。
+   接着进入beforeMount，这时字符串，模板都已经编译好还没有进入页面，
+   此时进入mounted状态，Dom就有了。当更改数据时候，数据是更新了，但试图不一定能一一映射，
+   这时候就使用nextTick直接拿到DOM，不用依依映射。
+   当数据变化就到了beforeUpdate和updated，这两个一个是更新前一个是更新后，一般用computed居多。
+   然后就到了beforeDestroy和destroy，像路由切换就用destroyed，没有路由时候，人为手动触发，
+   有路由，切换路由时候，上一个组件触发。
+   */
+   new Vue({
+       el:'#ap',
+       data:{
+            val:'hao123'
+       },
+       beforeCreate(){
+            this.val="12306"
+       }
+   });
+    </script>
+</body>
+</html>
