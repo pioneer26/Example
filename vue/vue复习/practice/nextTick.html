@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+      <div ref="msgDiv">{{msg}}</div>
+      <div v-if="msg1">消息已传出: {{msg1}}</div>
+      <div v-if="msg2">消息已传出: {{msg2}}</div>
+      <div v-if="msg3">消息已传出: {{msg3}}</div>
+      <br>
+      <button @click="changeMsg">点我改变</button>
+    </div>
+    
+    <script>  
+   /*
+   vue中nextTick可以拿到更新后的DOM元素
+   如果在mounted下不能准确拿到DOM元素，可以使用nextTick
+   在Vue生命周期的created()钩子函数进行的DOM操作一定要放在Vue.nextTick()的回调函数中
+  */
+ new Vue({
+  el:'#app',
+  data:{
+    msg:'你好，vue',
+    msg1:'',
+    msg2:'',
+    msg3:''
+  },
+  methods:{
+    changeMsg(){
+      this.msg = 'hello world'
+      this.msg1 = this.$refs.msgDiv.innerHTML
+      this.$nextTick(()=>{
+        this.msg2 = this.$refs.msgDiv.innerHTML
+      })
+      this.msg3 = this.$refs.msgDiv.innerHTML
+    } 
+  }
+ });
+ /*
+结果：msg1和msg3显示的内容还是变换之前的，而msg2显示的内容是变换之后的 
+说明Vue中DOM更新是异步的
+*/
+    </script>
+</body>
+</html>

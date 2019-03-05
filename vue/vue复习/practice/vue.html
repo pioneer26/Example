@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+    <style>
+    .active{width:100%;background:red;}
+    ul li{cursor: pointer;}
+    </style>
+</head>
+<body>
+    <div id="app">      
+        <button @click="fn">点击</button>
+        <ul>
+            <li 
+                v-for="(val,key) in item" 
+                :class="{active:val.onOff}" 
+                @click="sub(key,val,$event)"
+            >{{val.title}}</li>
+        </ul>
+    </div>
+    <script>  
+    //在事件函数中，如果不加括号就默认传入event对象(第一个参数为event)
+    //如果有参数了，继续使用event对象，就要使用$event
+   const vm = new Vue({
+       el:'#app',
+       data:{
+        item:[],
+        num:0
+       },
+       methods:{
+        fn(ev){
+            this.item.push({
+                title:++this.num,
+                onOff:false
+            });
+        },
+        sub(key,val,event){
+            //点击某个li的时候，取出当前对应的数据，改变数据，vue自动更新视图
+            this.item[key].onOff = !this.item[key].onOff
+        }
+       }
+   })
+    </script>
+</body>
+</html>

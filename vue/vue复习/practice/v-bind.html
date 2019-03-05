@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+    <style>
+        .classA{
+            color:red;
+        }
+        .classB{
+            color:orange;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+      <div :class="classA">绑定class</div>
+      <div :class="{classA:isok}">绑定class的判断</div>
+      <div :class="{classA,classB}">绑定class中数组</div>
+      <div :class="isok?classA:classB">绑定class的三元运算符</div>
+      <div>
+          <input type="checkbox" id="isok" v-model="isok">
+      </div>
+    </div>
+    <script>
+    /*
+       v-bind:属性名
+        缩写:
+            :class
+            一般是用来操作属性。
+            动态绑定数据，及时对页面的数据进行变更
+            :class="c"  可以写数据
+            :class="{red:true}"  red->类名: 布尔值 ，只有为true的时候才显示这个class
+            :class="[c1,c2]" c1和c2为对象 {red:true}
+            常用的：class、style、src、href
+
+    */
+   new Vue({
+       el:'#app',
+       data:{
+          classA:'classA',
+          classB:'classB',
+          isok:true
+       },
+       
+   });
+    </script>
+</body>
+</html>

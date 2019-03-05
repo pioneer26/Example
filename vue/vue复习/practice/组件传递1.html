@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>{{arr}}</h2>
+        <ppx :custom="arr"></ppx>
+    </div>
+    <script>  
+    /*
+       1、在子组件上加一个v-bind:自定义属性,等于父级的数据
+            比如<ppx v-bind:data="arr"></ppx>
+                简写<ppx :data="arr">
+        2、子组件通过props接收
+            props:['data']
+        3、使用
+            {{data}}
+        PS：自定义属性不要和子组件数据名称一样
+            props可以为数字，数组时候传字符串
+                 也可以为对象，为了启用高级配置（传入数据类型的检测和设置默认值）
+                 ***一般使用对象形式
+   */
+  let vm = {
+    props:['custom'],
+    template:`
+        <ul>
+            <li v-for="(val,key) in data">{{val}}</li>
+        </ul>
+    `
+  }
+  Vue.component('app',vm)
+   new Vue({
+    el:'#app',
+    data:{
+        arr:[1,2,3]
+    }
+   })
+    </script>
+</body>
+</html>

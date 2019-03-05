@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+       父组件:{{money}}
+       <child :m="money"></child>
+    </div>
+    <script>  
+    let vm = {
+      props:['m'],
+      template:`<div>子组件:{{m}}</div>`
+    }
+    Vue.component('child',vm)
+    new Vue({
+      el:'#app',
+      data:{
+        money:200
+      }
+    });
+  
+    </script>
+</body>
+</html>

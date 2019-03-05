@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+    <section class="todoapp" id="app">
+        <div>
+            <my-header
+            @addrecord="parentAdd"
+            ></my-header>
+            <section class="main">
+                <input 
+                class="toggle-all" 
+                type="checkbox"
+                v-model="all"
+
+                >
+                <List 
+                :act="filters"
+                @rmdata="parentRm"
+                >
+                </List>
+            </section>
+            <my-footer
+            v-show="!!arr.length"
+            :n="num"
+            :cn="cnum"
+            ></my-footer>
+        </div>
+    </section>
+<script src="js/vue.min.js"></script>
+<script src="component/header.js"></script>
+<script src="component/footer.js"></script>
+<script src="component/list.js"></script>
+<script>
+/*
+实现的一些功能：
+1、输入内容回车添加内容
+2、全选功能
+3、勾选任意内容进行删除
+4、根据hash不同，过滤渲染的数据
+*/
+new Vue({
+    el:'#app',
+    data:{
+        filters:[],//拿到过滤之后的数据
+        cunm:'/checked',//值根据hash值而改变，且会影响tab的active状态
+        arr:[
+            {
+                id:0,
+                city:'多伦多',
+                checked:true
+            },
+            {
+                id:1,
+                city:'悉尼',
+                checked:false
+            },
+            {
+                id:2,
+                city:'慕尼黑',
+                checked:false
+            },
+            {
+                id:3,
+                city:'雅加达',
+                checked:false
+            }
+        ]
+    },
+    directives:{
+        focus(el,bindings){
+            //当点击当前li时候，让内部输入框获取焦点
+            if(bindings.value){
+                el.focus();
+            }
+        }
+    },
+    methods:{
+        //把传过来的数据添加到数组中
+        parentAdd(data){
+            this.arr.unshift(data)
+        },
+        //利用filter删除（把e.id等于id的过滤掉，留下不等于id的）
+        parentRm(id){
+            this.arr = this.arr.filter(e=>e.id!==id)           
+        },
+        hashFn(){
+            //当hash改变时候，过滤数据
+            let H = window.location.hash.split('#')[1];
+            this.cnum = H;
+            this.filters = this.arr.filter(e=>{
+                switch(H){
+                    case '/all':
+                        return e;
+                        break;
+                    case '/unchecked':
+                        return !e.checked;
+                        break;
+                    case '/checked':
+                        return e.checked;
+                        break;
+                    default:
+                        return e;
+                        break
+                }
+            });
+        }
+    },
+    computed:{
+        all:{
+            get(){
+                //如果arr的length没有直接返回false
+                if(!this.arr.length){
+                    return false;
+                }   
+                //所有checked都是真的，就全部选中
+                return this.arr.every(e=>e.checked)
+            },
+            set(newVal){
+                //把所有的checked都等于newVal
+                return this.arr.forEach(e=>{
+                    e.checked = newVal
+                })
+            }
+        },
+        num(){
+            //未选中的个数
+            return this.arr.filter(e=>!e.checked).length;
+        }
+    },
+    //当点击选中的时候，会改变arr的数据，当arr中的数据改变就重新过滤数组
+    watch:{
+        arr:{
+            handler(){
+                this.hashFn();
+            },
+            deep:true
+        }
+    },
+    created(){
+        let hash = window.location.hash;
+        //如果没有hash就给他设置
+        if(!hash){
+            window.location.hash = '#/all';
+        }else{
+            this.hashFn();
+        }
+        window.onhashchange = () =>{
+            this.hashFn();
+        }
+    }
+});
+</script>
+</body>
+</html>

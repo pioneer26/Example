@@ -177,7 +177,7 @@ ul input{
 
             <div class="folter">
                 <span>total</span>
-                <span></span>
+                <span>{{sum}}</span>
             </div>
             <div 
                 class="kuang"
@@ -269,6 +269,11 @@ new Vue({
             //隐藏弹框
             this.tips = 'none';
             this.num = null;
+        }
+    },
+    computed:{
+        sum(){
+            return '$' + this.arr.filter(e=>e.active).reduce((prev,num)=>prev+num.price,0);
         }
     }
 }); 

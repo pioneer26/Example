@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+    <style>
+    .active{
+        background: red;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+     小黄<input type="checkbox" value="小黄" v-model="arr">
+     小蓝<input type="checkbox" value="小蓝" v-model="arr">
+     小绿<input type="checkbox" value="小绿" v-model="arr">
+     {{arr}}
+    </div>
+    <script>
+    /*
+       v-model:在表单上创建双向数据绑定
+       当在表单元素中，绑定了v-model，那么只要用户改变视图中的内容
+       那么就等同于直接改变数据，当然改变数据，一样会改变视图
+
+        在使用v-model的时候，如果放个数组，那么会自动查找表单元素中的value
+        没有则出现null,如果要统计多个表单元素的信息，可以把同一个数据绑定到 v-model上
+       
+    */
+   new Vue({
+       el:'#app',
+       data:{
+          arr:[]
+       },
+       
+   });
+    </script>
+</body>
+</html>

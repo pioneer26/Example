@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+</head>
+<body>
+    <script>
+    function Fruit(){
+
+    }
+    Fruit.prototype.on = function(eventName,callback){
+      if(this._events[eventName]){
+        this._events[eventName].push(callback)
+      }else{
+        this._events[eventName] = [callback]
+      }
+    }
+    Fruit.prototype.emit = function(eventName){
+      if(this._events[eventName]){
+        this._events[eventName].forEach(cb=>cb())
+      }
+    }
+    let fruit = new Fruit();
+    let apple = ()=>{
+      console.log('苹果');
+    }
+    let orange = ()=>{
+      console.log('橘子');
+    }
+    let grape = ()=>{
+      console.log('葡萄');
+    }
+    fruit.on('水果',apple);
+    fruit.on('水果',orange);
+    fruit.on('水果',grape);
+    fruit.emit('水果');
+    </script>
+</body>
+</html>

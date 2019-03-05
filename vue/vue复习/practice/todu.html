@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="rm">删除</button>
+        <input type="text" @keyup.13="fn" v-model="val">
+      <ul>
+          <li v-for="(val,key) in arr">
+              <input type="checkbox" v-model="val.checked">{{val.name}}
+          </li>
+      </ul>
+        
+    </div>
+    <script>
+   new Vue({
+       el:'#app',
+       data:{
+        arr:[
+            {
+                checked:true,
+                name:'巴黎'
+            },
+            {
+                checked:false,
+                name:'东京'
+            },
+            {
+                checked:false,
+                name:'伦敦'
+            },
+            {
+                checked:false,
+                name:'纽约'
+            }
+        ],
+        val:''
+       },
+      
+       methods:{
+        fn(){
+            this.arr.unshift({
+                name:this.val,
+                checked:false
+            })
+        },
+        rm(){
+            //使用filter过滤删除，把选中的过滤掉，留下没有选中的，赋值给this.arr
+            this.arr = this.arr.filter(e=>!e.checked)
+        }
+       }
+   });
+    </script>
+</body>
+</html>

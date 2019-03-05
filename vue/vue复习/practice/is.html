@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+      <button v-for="i in 3" @click="click(i)">{{i}}</button>
+      <div :is="happy"></div>
+
+    </div>
+    
+    <script>  
+    //有些时候，组件本身和使用组件的地方有冲突,可以使用is来解决
+    let ppx1 = {
+      template:`<div>英国</div>`
+    }
+   let ppx2 = {
+      template:`<div>法国</div>`
+    }
+   let ppx3 = {
+      template:`<div>德国</div>`
+    }
+   new Vue({
+    el:'#app',
+    data:{
+      happy:'ppx1'
+    },
+    methods:{
+      click(key){
+        switch(key){
+          case 1:
+            this.happy = 'ppx1';
+          break
+          case 2:
+            this.happy = 'ppx2';
+          break
+          case 3:
+            this.happy = 'ppx3';
+          break
+        }
+      }
+    },
+    components:{
+      ppx1,
+      ppx2,
+      ppx3
+    }
+   });
+
+    </script>
+</body>
+</html>
